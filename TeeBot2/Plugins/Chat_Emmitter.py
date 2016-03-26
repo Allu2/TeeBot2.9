@@ -3,7 +3,6 @@ class Chat:
 
     def __init__(self):
         self.handle_events = ["CHAT","SERVER SAY"]
-        self.commands = "commands.cfg"
         pass
     def handle(self, event, bot, plugins):
         bot.debug("Chat_Emitter is handling this.")
