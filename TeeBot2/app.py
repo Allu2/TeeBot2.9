@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Aleksi Palomäki'
-from TeeBot2 import TeeBot
+__author__ = 'Aleksi PalomÃ¤ki'
+import TeeBot
 from flask import Flask, request, copy_current_request_context, session, send_from_directory, send_file
 from flask_restful import Resource, Api
 
 from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 import os
 
-servers = ["Ene", "Miku", "IA"]
+servers = ["IA"]
 
 
 app = Flask(__name__)
@@ -17,8 +17,8 @@ socketio = SocketIO(app)
 
 
 bots = {
-    "Ene":  TeeBot.TeeBot("Ene"),
-    "Miku": TeeBot.TeeBot("Miku"),
+ #   "Ene":  TeeBot.TeeBot("Ene"),
+ #   "Miku": TeeBot.TeeBot("Miku"),
     "IA":   TeeBot.TeeBot("IA"),
 }
 auth_ids = []
@@ -45,12 +45,16 @@ def emit_info(event):
 def conn_handler():
     socketio.emit("servers", {"servers": servers})
     print("uid is:"+get_sid())
-
     pass
 
 @socketio.on('event')
 def handle_event():
     pass
+
+
+@socketio.on('ping')
+def handle_ping():
+    socketio.emit("pong", {"PONG!!"})
 
 @socketio.on('server')
 def handle_server(server):

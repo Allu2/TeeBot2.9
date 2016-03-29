@@ -1,7 +1,7 @@
 __author__ = 'Aleksi'
 
 
-class Chat:
+class Event:
     def __init__(self):
         self.handle_events = ["NICK CHANGE",
                               "MAP_CHANGE",

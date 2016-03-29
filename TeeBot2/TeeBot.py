@@ -210,9 +210,9 @@ class TeeBot(Thread):
             if tee.get_score() != event["score"]:
                 tee.set_score(event["score"])
         except AttributeError as e:
-            self.exception(e)
+            self.exception(repr(e))
         except KeyError as e:
-            #self.exception(e)
+            self.exception(repr(e))
             self.debug("Didn't find Tee: {} in player lists, adding it now:".format(event["player_name"]))
             with open(self.accesslog, "a", encoding="utf-8") as accesslogi:
                 nick = event["player_name"]
