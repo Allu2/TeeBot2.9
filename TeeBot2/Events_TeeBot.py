@@ -30,7 +30,7 @@ import re
 import time
 import logging
 logger = logging.getLogger("Bot")
-class Events():
+class Events:
     def msg_found(self, msg, message):
         """
         ## msg_found()
@@ -67,7 +67,7 @@ class Events():
                 groups = result.groups()
                 lst = list(result.groups())
                 lst.append(
-                    "KILL") #killer_id, killer_name, victim_id, victim_name, used_weapon_id, special(0/1(?)), type of event
+                    "KILL") # killer_id, killer_name, victim_id, victim_name, used_weapon_id, special(0/1(?)), type of event
                 reply_dictionary = \
                     {
                         "event_type": "KILL",
@@ -89,7 +89,7 @@ class Events():
                 lst.append(self.Itemsolv(int(lst[2]), int(lst[3])))
 
                 lst.append(
-                    "PICKUP") #player_id, player_name, item_group(0 = hearts, 1 = armors,  2 = weapons(2/0=hammer 2/1 = pistol 2/2 = shotgun 2/3 = grenade 2/4 = rifle, 3 = special), group_id(useful for weapons (ninja 3/5)
+                    "PICKUP") # player_id, player_name, item_group(0 = hearts, 1 = armors,  2 = weapons(2/0=hammer 2/1 = pistol 2/2 = shotgun 2/3 = grenade 2/4 = rifle, 3 = special), group_id(useful for weapons (ninja 3/5)
                 reply_dictionary = \
                     {
                         "event_type": "PICKUP",
@@ -122,7 +122,7 @@ class Events():
                 result = re.search("flag_grab player='(\d+):(.+)'", line)
                 groups = result.groups()
                 lst = list(result.groups())
-                lst.append("FLAG") #player_id, player_name, type of event
+                lst.append("FLAG") # player_id, player_name, type of event
                 reply_dictionary = \
                     {
                         "event_type":       "FLAG_GRAB",
@@ -137,7 +137,7 @@ class Events():
                 result = re.search("flag_return player='(\d+):(.+)'", line)
                 groups = result.groups()
                 lst = list(result.groups())
-                lst.append("FLAG") #player_id, player_name, type of event
+                lst.append("FLAG") # player_id, player_name, type of event
                 reply_dictionary = \
                     {
                         "event_type":       "FLAG_RETURN",
@@ -148,11 +148,11 @@ class Events():
                 return reply_dictionary
 
             if splitted_line[1] == "flag_capture":
-                #if "[game]: flag_capture" in line:
+                # if "[game]: flag_capture" in line:
                 result = re.search("flag_capture player='(\d+):(.+)'", line)
                 groups = result.groups()
                 lst = list(result.groups())
-                lst.append("CAPTURE") #player_id, player_name, type of event
+                lst.append("CAPTURE") # player_id, player_name, type of event
                 reply_dictionary = \
                     {
                         "event_type":       "CAPTURE",
@@ -191,7 +191,7 @@ class Events():
                     }
                 return reply_dictionary
 
-        if (line.split(" ")[0] == "[chat]:" or line.split(" ")[0] == "[teamchat]:"):
+        if line.split(" ")[0] == "[chat]:" or line.split(" ")[0] == "[teamchat]:":
             if splitted_line[1] != "***":
                 if "[teamchat]" in line.split(" ")[0]:
                     lst = self.conversation(line, True)
@@ -228,8 +228,6 @@ class Events():
 
                     return reply_dictionary
                 else:
-
-
                     message = line.split(" ")
                     message.pop(0)
                     message.pop(0)
@@ -237,7 +235,7 @@ class Events():
 
                     reply_dictionary = \
                         {
-                            "event_type": "SERVER SAY",
+                            "event_type": "SERVER_SAY",
                             "message":    message,
                             "time_stamp": time.time()
                         }
@@ -334,15 +332,10 @@ class Events():
                 return {"event_type": "UNKNOWN", "time_stamp": time.time(), "line": line}
         else:
             return {"event_type": "UNKNOWN", "time_stamp": time.time(), "line": line}
-            #b'[Console]: hei\n'
 
     def conversation(self, line, teamchat):
         """
         ## conversation()
-        Conversation is the function that handles chat messages and parses information from them.
-        This information includes nick, the message, team id, player id and none which can be used to determine if message went to wrong location.
-        if the information is correct "none" is False since we do have info
-        if we got wrong "non chat" line we return none with value True, after all we have no info at all.
         """
         print(type(line))
         if (line.split(" ")[0] == "[chat]:" or line.split(" ")[0] == "[teamchat]:") and line.split(" ")[1] != "***":

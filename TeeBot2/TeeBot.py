@@ -60,7 +60,7 @@ class TeeBot(Thread):
             "round_start": 0,
             "map": "",
             "gametype": "",
-            "kill_history": [[0],[0]],
+            "kill_history": [[0], [0]],
             "red":{
                 "score": 0,
                 "players": {},

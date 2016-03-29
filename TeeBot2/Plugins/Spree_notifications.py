@@ -1,21 +1,22 @@
 __author__ = 'Aleksi'
 import threading
+
+
 class Spree:
     def __init__(self):
         self.handle_events = ["KILL"]
         pass
+
     def handle(self, event, bot, plugins):
         bot.debug("Spree_notifications is handling this.")
         if event["event_type"] == "KILL" and event["user_weapon_id"] != b'-3':
             # bot.debug("We got event: {}".format(event), "DEBUG")
             try:
                 killer_tee = bot.get_Tee(event["killer_id"])
-                if int(killer_tee.get_idnum()) == int(event["victim_id"]): #In case of suicide
+                if int(killer_tee.get_idnum()) == int(event["victim_id"]):  # In case of suicide
                     killer_tee.set_spree(0)
-                    killer_tee.set_score(killer_tee.get_score()-1)
-                    #killer_tee.set_score(killer_tee.get_score())
-
-
+                    killer_tee.set_score(killer_tee.get_score() - 1)
+                    # killer_tee.set_score(killer_tee.get_score())
                 else:
                     killer_tee.set_spree(killer_tee.get_spree() + 1)
                     victim_tee = bot.get_Tee(event["victim_id"])

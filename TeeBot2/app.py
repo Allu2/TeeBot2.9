@@ -1,4 +1,5 @@
-__author__ = 'Aleksi Palom‰ki'
+# -*- coding: utf-8 -*-
+__author__ = 'Aleksi Palom√§ki'
 from TeeBot2 import TeeBot
 from flask import Flask, request, copy_current_request_context, session, send_from_directory, send_file
 from flask_restful import Resource, Api
@@ -21,7 +22,6 @@ bots = {
     "IA":   TeeBot.TeeBot("IA"),
 }
 auth_ids = []
-#Start up bots
 
 def get_sid():
     return request.__getattr__("sid")

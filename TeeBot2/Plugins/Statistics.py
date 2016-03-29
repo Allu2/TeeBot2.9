@@ -1,9 +1,12 @@
 __author__ = 'Aleksi'
 from subprocess import check_output
+
+
 class Stats:
     def __init__(self):
         self.handle_events = ["NOTHING"]
         pass
+
     def handle(self, event, bot, plugins):
         bot.debug("Statistics is handling this.")
         msg = event[1]
@@ -20,5 +23,5 @@ class Stats:
         if "/lag" == msg:
             lag = str(check_output(["ifstat", "1", "1"])).split()
             down = lag[-2]
-            up = lag[-1].replace("\\", "").replace("n", "").replace("\n","").replace("'", "")
+            up = lag[-1].replace("\\", "").replace("n", "").replace("\n", "").replace("'", "")
             bot.say("In: {}kb/s  Out: {}kb/s.".format(down, up))

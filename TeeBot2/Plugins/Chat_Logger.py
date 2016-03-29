@@ -1,10 +1,13 @@
 __author__ = 'Aleksi'
 import time
+
+
 class Logger:
     def __init__(self):
         self.handle_events = ["CHAT"]
         self.chatlog = "chat.log"
         pass
+
     def handle(self, event, bot, plugins):
         bot.debug("Chat_Logger is handling this.")
         msg = event["message"]

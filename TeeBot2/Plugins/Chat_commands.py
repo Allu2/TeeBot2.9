@@ -1,11 +1,13 @@
 __author__ = 'Aleksi'
 from subprocess import check_output
-class Chat:
 
+
+class Chat:
     def __init__(self):
         self.handle_events = ["CHAT"]
         self.commands = "commands.cfg"
         pass
+
     def handle(self, event, bot, plugins):
         bot.debug("Chat_Commands is handling this.")
         msg = event["message"]
@@ -34,5 +36,5 @@ class Chat:
         if "/lag" == msg:
             lag = str(check_output(["ifstat", "1", "1"])).split()
             down = lag[-2]
-            up = lag[-1].replace("\\", "").replace("n", "").replace("\n","").replace("'", "")
+            up = lag[-1].replace("\\", "").replace("n", "").replace("\n", "").replace("'", "")
             bot.say("In: {}kb/s  Out: {}kb/s.".format(down, up))
