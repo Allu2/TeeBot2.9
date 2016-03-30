@@ -90,7 +90,7 @@ class Tee(object):
         self.attributes["port"] = port
 
     def get_score(self):
-        return self.attributes["score"]
+        return int(self.attributes["score"])
 
     def set_score(self, score):
         score = int(score)
