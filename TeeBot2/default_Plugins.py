@@ -19,4 +19,4 @@ class default_Plugins():
         self.register(Weapon_Stats.Weapon_Stats())
 
         from Plugins import API_stuff
-        self.register(Weapon_Stats.Weapon_Stats())
+        self.register(API_stuff.API_stuff())
