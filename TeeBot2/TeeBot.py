@@ -266,7 +266,7 @@ class TeeBot(Thread):
 
         lst = self.events.game_events(line)
         lst["line"] = line
-        self.debug("We got event:\n"+dumps(lst))
+        self.debug("We got event:\n"+dumps(lst, indent=3))
         if lst is not None:
             self.handle_event(lst)
             self.plugin_loader.event_handler(lst)
