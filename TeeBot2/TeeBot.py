@@ -25,7 +25,7 @@ from threading import Thread
 import time, logging, importlib
 from math import floor
 from time import strftime, gmtime
-from json import dumps, load
+from json import dumps, load, loads
 from tw_api import get_server_info
 import Tees
 import plugin_loader
@@ -49,7 +49,7 @@ class TeeBot(Thread):
         logging.basicConfig()
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.DEBUG)
-        self.debug = self.logger.debug
+        self.debug = self.pretty_debug
         self.info = self.logger.info
         self.exception = self.logger.exception
         self.plugin_loader = plugin_loader.Plugin_loader(self)
@@ -80,6 +80,13 @@ class TeeBot(Thread):
                 "players": {},
             },
         }
+
+    def pretty_debug(self, string):
+        try:
+            pretty = loads(string)
+            self.logger.debug(dumps(pretty, indent=3))
+        except:
+            self.logger.debug(string)
 
     @property
     def player_count(self):
